@@ -13,8 +13,8 @@ class TaskService
         $this->taskRepository = $taskRepository;
     }
 
-    public function createTask(array $data): Task
+    public function createTask(array $attributes): Task
     {
-        return $this->taskRepository->create($data);
+        return $this->taskRepository->create($attributes);
     }
 }
