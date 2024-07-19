@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/store', [TaskController::class, 'store']);
+Route::post('/tasks', [TaskController::class, 'store']);
