@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Domain\Task\TaskRepositoryInterface;
 use App\Domain\Task\TaskService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Mockery;
 use Tests\TestCase;
 
 class TaskServiceTest extends TestCase
@@ -17,7 +18,7 @@ class TaskServiceTest extends TestCase
     {
         parent::setUp();
 
-        $taskRepository = $this->mock(TaskRepositoryInterface::class);
+        $taskRepository = Mockery::mock(TaskRepositoryInterface::class);
         $taskRepository->shouldReceive('create')->andReturn(new \App\Models\Task([
             'title' => 'Test Task',
             'description' => 'This is a test task.',
@@ -37,5 +38,12 @@ class TaskServiceTest extends TestCase
         ]);
 
         $this->assertEquals('Test Task', $task->title);
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+
+        parent::tearDown();
     }
 }
